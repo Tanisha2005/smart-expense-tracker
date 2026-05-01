@@ -1,7 +1,13 @@
-import { Wallet, ArrowDownCircle, ArrowUpCircle } from "lucide-react";
+import { useState } from "react";
+import {
+  Wallet,
+  ArrowDownCircle,
+  ArrowUpCircle,
+  PlusCircle,
+} from "lucide-react";
 
 function App() {
-  const transactions = [
+  const [transactions, setTransactions] = useState([
     {
       id: 1,
       title: "Salary",
@@ -20,13 +26,29 @@ function App() {
       amount: 649,
       type: "expense",
     },
-    {
-      id: 4,
-      title: "Freelance Project",
-      amount: 12000,
-      type: "income",
-    },
-  ];
+  ]);
+
+  const [title, setTitle] = useState("");
+  const [amount, setAmount] = useState("");
+  const [type, setType] = useState("expense");
+
+  const addTransaction = (e) => {
+    e.preventDefault();
+
+    if (!title || !amount) return;
+
+    const newTransaction = {
+      id: Date.now(),
+      title,
+      amount: Number(amount),
+      type,
+    };
+
+    setTransactions([newTransaction, ...transactions]);
+    setTitle("");
+    setAmount("");
+    setType("expense");
+  };
 
   const income = transactions
     .filter((t) => t.type === "income")
@@ -47,6 +69,51 @@ function App() {
           <h1 className="text-4xl font-bold text-slate-800">
             Smart Expense Tracker
           </h1>
+        </div>
+
+        {/* Add Transaction Form */}
+        <div className="bg-white rounded-2xl shadow-lg p-6 mb-8">
+          <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
+            <PlusCircle className="text-blue-600" />
+            Add Transaction
+          </h2>
+
+          <form
+            onSubmit={addTransaction}
+            className="grid md:grid-cols-4 gap-4"
+          >
+            <input
+              type="text"
+              placeholder="Transaction Title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              className="p-3 border rounded-xl outline-none focus:ring-2 focus:ring-blue-500"
+            />
+
+            <input
+              type="number"
+              placeholder="Amount"
+              value={amount}
+              onChange={(e) => setAmount(e.target.value)}
+              className="p-3 border rounded-xl outline-none focus:ring-2 focus:ring-blue-500"
+            />
+
+            <select
+              value={type}
+              onChange={(e) => setType(e.target.value)}
+              className="p-3 border rounded-xl outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              <option value="expense">Expense</option>
+              <option value="income">Income</option>
+            </select>
+
+            <button
+              type="submit"
+              className="bg-blue-600 text-white rounded-xl px-6 py-3 hover:bg-blue-700 transition"
+            >
+              Add
+            </button>
+          </form>
         </div>
 
         {/* Summary Cards */}
