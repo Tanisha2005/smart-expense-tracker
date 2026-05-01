@@ -1,45 +1,55 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Wallet,
   ArrowDownCircle,
   ArrowUpCircle,
   PlusCircle,
+  Trash2,
 } from "lucide-react";
 
 function App() {
-  const [transactions, setTransactions] = useState([
-    {
-      id: 1,
-      title: "Salary",
-      amount: 50000,
-      type: "income",
-    },
-    {
-      id: 2,
-      title: "Groceries",
-      amount: 2500,
-      type: "expense",
-    },
-    {
-      id: 3,
-      title: "Netflix Subscription",
-      amount: 649,
-      type: "expense",
-    },
-  ]);
+  const [transactions, setTransactions] = useState(() => {
+    const savedTransactions = localStorage.getItem("transactions");
+    return savedTransactions
+      ? JSON.parse(savedTransactions)
+      : [
+          {
+            id: 1,
+            title: "Salary",
+            amount: 50000,
+            type: "income",
+          },
+          {
+            id: 2,
+            title: "Groceries",
+            amount: 2500,
+            type: "expense",
+          },
+          {
+            id: 3,
+            title: "Netflix Subscription",
+            amount: 649,
+            type: "expense",
+          },
+        ];
+  });
 
   const [title, setTitle] = useState("");
   const [amount, setAmount] = useState("");
   const [type, setType] = useState("expense");
 
+  useEffect(() => {
+    localStorage.setItem("transactions", JSON.stringify(transactions));
+  }, [transactions]);
+
   const addTransaction = (e) => {
     e.preventDefault();
 
-    if (!title || !amount) return;
+    if (!title.trim() || !amount) return;
 
     const newTransaction = {
       id: Date.now(),
-      title,
+      title: title.trim(),
       amount: Number(amount),
       type,
     };
@@ -48,6 +58,12 @@ function App() {
     setTitle("");
     setAmount("");
     setType("expense");
+  };
+
+  const deleteTransaction = (id) => {
+    setTransactions(
+      transactions.filter((transaction) => transaction.id !== id)
+    );
   };
 
   const income = transactions
@@ -71,7 +87,7 @@ function App() {
           </h1>
         </div>
 
-        {/* Add Transaction Form */}
+        {/* Add Transaction */}
         <div className="bg-white rounded-2xl shadow-lg p-6 mb-8">
           <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
             <PlusCircle className="text-blue-600" />
@@ -87,7 +103,7 @@ function App() {
               placeholder="Transaction Title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              className="p-3 border rounded-xl outline-none focus:ring-2 focus:ring-blue-500"
+              className="p-3 border rounded-xl focus:ring-2 focus:ring-blue-500 outline-none"
             />
 
             <input
@@ -95,13 +111,13 @@ function App() {
               placeholder="Amount"
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
-              className="p-3 border rounded-xl outline-none focus:ring-2 focus:ring-blue-500"
+              className="p-3 border rounded-xl focus:ring-2 focus:ring-blue-500 outline-none"
             />
 
             <select
               value={type}
               onChange={(e) => setType(e.target.value)}
-              className="p-3 border rounded-xl outline-none focus:ring-2 focus:ring-blue-500"
+              className="p-3 border rounded-xl focus:ring-2 focus:ring-blue-500 outline-none"
             >
               <option value="expense">Expense</option>
               <option value="income">Income</option>
@@ -167,16 +183,25 @@ function App() {
                   </p>
                 </div>
 
-                <p
-                  className={`text-xl font-bold ${
-                    transaction.type === "income"
-                      ? "text-green-600"
-                      : "text-red-600"
-                  }`}
-                >
-                  {transaction.type === "income" ? "+" : "-"}₹
-                  {transaction.amount.toLocaleString()}
-                </p>
+                <div className="flex items-center gap-4">
+                  <p
+                    className={`text-xl font-bold ${
+                      transaction.type === "income"
+                        ? "text-green-600"
+                        : "text-red-600"
+                    }`}
+                  >
+                    {transaction.type === "income" ? "+" : "-"}₹
+                    {transaction.amount.toLocaleString()}
+                  </p>
+
+                  <button
+                    onClick={() => deleteTransaction(transaction.id)}
+                    className="text-red-500 hover:text-red-700 transition"
+                  >
+                    <Trash2 size={20} />
+                  </button>
+                </div>
               </div>
             ))}
           </div>
