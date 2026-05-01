@@ -1,16 +1,45 @@
-# React + Vite
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/fef4fdc2-8ec3-49b6-be4d-e43b6bef867d" /># Smart Expense Tracker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern and responsive personal finance management application built using React. Track your income and expenses, visualize spending patterns, and manage your finances efficiently.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+* Add income and expense transactions
+* Delete transactions instantly
+* Real-time balance calculation
+* Interactive financial overview using pie charts
+* Persistent data storage with Local Storage
+* Fully responsive modern UI
+* Clean and intuitive user experience
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+* React
+* Tailwind CSS
+* Recharts
+* Lucide React
+* Local Storage
 
-## Expanding the ESLint configuration
+## Installation
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```bash
+git clone https://github.com/YOUR_USERNAME/smart-expense-tracker.git
+cd smart-expense-tracker
+npm install
+npm run dev
+```
+
+## Live Demo
+smart-expense-tracker-psi-ten.vercel.app
+
+## Screenshots
+<img width="1341" height="872" alt="screenshot" src="https://github.com/user-attachments/assets/75c2ef44-18b9-4925-b385-f98d2c9e1602" />
+
+## Future Improvements
+
+* Monthly expense reports
+* Category-based analytics
+* Dark mode
+* Export transaction history
+* User authentication
+
