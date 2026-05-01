@@ -33,7 +33,8 @@ npm run dev
 smart-expense-tracker-psi-ten.vercel.app
 
 ## Screenshots
-<img width="1341" height="872" alt="screenshot" src="https://github.com/user-attachments/assets/75c2ef44-18b9-4925-b385-f98d2c9e1602" />
+<img width="1341" height="872" alt="ss" src="https://github.com/user-attachments/assets/6a98792b-2968-4495-b1ef-9db76d77c947" />
+
 
 ## Future Improvements
 
