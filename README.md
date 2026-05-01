@@ -1,4 +1,3 @@
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/fef4fdc2-8ec3-49b6-be4d-e43b6bef867d" /># Smart Expense Tracker
 
 A modern and responsive personal finance management application built using React. Track your income and expenses, visualize spending patterns, and manage your finances efficiently.
 
